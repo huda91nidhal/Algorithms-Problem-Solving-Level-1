@@ -1,0 +1,47 @@
+#include<iostream>
+using namespace std;
+struct sttaskduration
+{
+	int numberofdays, numberofhours, numberofminutes, numberofseconds;
+
+};
+int readpositivenumbers(string message)
+{
+	float number = 0;
+	do
+	{
+		cout << message << endl;
+		cin >> number;
+	} while (number <= 0);
+	return number;
+}
+sttaskduration secondtotaskduration(int totalsecond)
+{
+	sttaskduration taskduration;
+	const int secondsperday = 24 * 60 * 60;
+	const int secondsperhour = 60 * 60;
+	const int secondsperminute = 60;
+	int reminder = 0;
+	taskduration.numberofdays = float(totalsecond / secondsperday);
+	reminder = totalsecond % secondsperday;
+	taskduration.numberofhours = float(reminder / secondsperhour);
+	reminder = reminder % secondsperhour;
+	taskduration.numberofminutes = float(reminder / secondsperminute);
+	reminder = reminder % secondsperminute;
+	taskduration.numberofseconds = reminder;
+	return taskduration;
+}
+void printtaskdurationdetails(sttaskduration taskduration)
+{
+	cout << endl;
+	cout << taskduration.numberofdays << " : "
+		<< taskduration.numberofhours << " : "
+		<< taskduration.numberofminutes << " : "
+		<< taskduration.numberofseconds << endl;
+}
+int main()
+{
+	int totalseconds = readpositivenumbers("please enter total seconds");
+	printtaskdurationdetails(secondtotaskduration(totalseconds));
+	return 0;
+}
