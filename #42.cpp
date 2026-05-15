@@ -1,0 +1,40 @@
+#include<iostream>
+using namespace std;
+struct sttaskduration 
+{
+	int numberofdays, numberofhours, numberofminutes, numberofseconds;
+
+};
+int readpositivenumber(string message)
+{
+	float number = 0;
+	do
+	{
+		cout << message << endl;
+		cin >> number;
+	} while (number <= 0);
+	return number;
+}
+sttaskduration readtaskduration()
+{
+	sttaskduration taskduration;
+	taskduration.numberofdays = readpositivenumber("please enter number of days");
+	taskduration.numberofhours = readpositivenumber("please enter number of hours");
+	taskduration.numberofminutes = readpositivenumber("please enter number of minutes");
+	taskduration.numberofseconds = readpositivenumber("please enter number of seconds");
+	return taskduration;
+}
+float taskdurationinsecond(sttaskduration taskduration)
+{
+	int durationinseconds = 0;
+	durationinseconds = taskduration.numberofdays * 24 * 60 * 60;
+	durationinseconds+=taskduration.numberofhours * 60 * 60;
+	durationinseconds+=taskduration.numberofminutes * 60;
+	durationinseconds += taskduration.numberofseconds;
+	return durationinseconds;
+}
+int main()
+{
+	cout << "\n Task duration in seconds "<<taskdurationinsecond(readtaskduration());
+	cout << endl;
+}
